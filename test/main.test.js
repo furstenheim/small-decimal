@@ -290,3 +290,43 @@ describe('floorToPow2', function () {
     })
   })
 })
+
+describe('floor', function () {
+  const testCases = [
+    {
+      input1: 1,
+      expected: 0
+    },
+    {
+      input1: 2,
+      expected: 1
+    },
+    {
+      input1: 2.1,
+      expected: 1
+    },
+    {
+      input1: 4,
+      expected: 2
+    },
+    {
+      input1: 18,
+      expected: 4
+    },
+    {
+      input1: 45,
+      expected: 5
+    },
+    {
+      input1: 1070,
+      expected: 10
+    }
+  ]
+
+  testCases.forEach(function ({ input1, input2, expected }) {
+    it(`Check ${input1}`, function () {
+      const result = new main.Decimal(input1).floorLog2()
+      expect(result).deep.equal(new main.Decimal(expected))
+    })
+  })
+})
