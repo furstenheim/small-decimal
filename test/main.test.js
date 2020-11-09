@@ -13,6 +13,10 @@ describe('Constructor', function () {
       expected: BigInt(2 ** 31)
     },
     {
+      input: 2,
+      expected: BigInt(2 ** 33)
+    },
+    {
       input: 2 ** 63,
       expected: BigInt(2 ** 63) * BigInt(2 ** 32)
     },
@@ -136,6 +140,48 @@ describe('add', function () {
   })
 })
 
+describe('sub', function () {
+  const testCases = [
+    {
+      input1: 1,
+      input2: 1,
+      expected: 0
+    },
+    {
+      input1: 2,
+      input2: 1,
+      expected: 1
+    },
+    {
+      input1: 1,
+      input2: 2,
+      expected: -1
+    },
+    {
+      input1: 5,
+      input2: 2,
+      expected: 3
+    },
+    {
+      input1: 5.5,
+      input2: 2.5,
+      expected: 3
+    },
+    {
+      input1: 3.2,
+      input2: 3.1,
+      expected: 0.1000000001
+    }
+  ]
+
+  testCases.forEach(function ({ input1, input2, expected }) {
+    it(`Check ${input1} sub ${input2}`, function () {
+      const result = new main.Decimal(input1).sub(new main.Decimal(input2))
+      expect(result).deep.equal(new main.Decimal(expected))
+    })
+  })
+})
+
 describe('mul', function () {
   const testCases = [
     {
@@ -200,6 +246,46 @@ describe('neg', function () {
   testCases.forEach(function ({ input1, input2, expected }) {
     it(`Check ${input1}`, function () {
       const result = new main.Decimal(input1).neg()
+      expect(result).deep.equal(new main.Decimal(expected))
+    })
+  })
+})
+
+describe('floorToPow2', function () {
+  const testCases = [
+    {
+      input1: 1,
+      expected: 1
+    },
+    {
+      input1: 2,
+      expected: 2
+    },
+    {
+      input1: 2.1,
+      expected: 2
+    },
+    {
+      input1: 4,
+      expected: 4
+    },
+    {
+      input1: 18,
+      expected: 16
+    },
+    {
+      input1: 45,
+      expected: 32
+    },
+    {
+      input1: 1070,
+      expected: 1024
+    }
+  ]
+
+  testCases.forEach(function ({ input1, input2, expected }) {
+    it(`Check ${input1}`, function () {
+      const result = new main.Decimal(input1).floorToPowOf2()
       expect(result).deep.equal(new main.Decimal(expected))
     })
   })
