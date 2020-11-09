@@ -2,12 +2,6 @@ const integralPower = 2 ** 32
 const bigintPower = BigInt(integralPower)
 class Decimal {
   constructor (number) {
-    if (number === Infinity) {
-      // TODO fix
-      this.specialNumber = number
-      this._number = BigInt(0)
-      return this
-    }
     const integralPart = parseInt(number)
     const floatPart = number - integralPart
 
@@ -22,7 +16,6 @@ class Decimal {
   }
 
   toNumber () {
-    // TODO add decimal part
     return parseInt(this._number / bigintPower) + parseFloat((this._number % bigintPower)) / integralPower
   }
 
@@ -57,10 +50,6 @@ class Decimal {
   }
 
   lessThan (decimal) {
-    // TODO fix
-    if (decimal.specialNumber) {
-      return true
-    }
     return this._number < decimal._number
   }
 
@@ -121,12 +110,10 @@ class Decimal {
       throw new Error('Only positive logarithms allow')
     }
     const current = new Decimal(-1)
-    const ONE = new Decimal(1)
 
     let next = BigInt(2 ** 32)
 
     while (true) {
-
       if (next > this._number) {
         return current
       }
@@ -154,7 +141,6 @@ class Decimal {
     const result = new Decimal(0)
     result._number = floor
     return result
-
   }
 }
 
