@@ -1,0 +1,14 @@
+{
+  "name": "small-decimal.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test:watch": "mocha --recursive --watch test"
+  },
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "sinon": "^9.2.1"
+  }
+}
